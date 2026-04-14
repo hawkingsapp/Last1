@@ -314,9 +314,7 @@
     .feature-body { font-size: 13.5px; color: var(--text-muted); line-height: 1.65; }
 
     /* ── SCROLLING FADE-IN ── */
-    .reveal {
-      opacity: 1;
-    }
+    .reveal { opacity: 1; }
     @supports (animation-timeline: scroll()) {
       .reveal {
         opacity: 0;
@@ -327,27 +325,125 @@
     }
     @keyframes reveal-fade { to { opacity: 1; } }
 
-    /* ── FOOTER ── */
-    footer {
-      background: #080F0A;
-      padding: 48px 24px;
-      text-align: center;
+    /* ════════════════════════════════
+       ── SUPPORT SECTION (Apple req.) ──
+    ════════════════════════════════ */
+    .support-section {
+      background: var(--dark);
       border-top: 1px solid var(--border);
     }
-    .footer-logo {
-      font-family: var(--font-display); font-size: 1.6rem; font-weight: 700;
-      color: var(--accent-green); margin-bottom: 12px;
+
+    .support-hero {
+      background: rgba(77,128,100,0.08);
+      border: 1px solid rgba(77,128,100,0.2);
+      border-radius: var(--radius-xl);
+      padding: 40px 36px;
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
     }
-    .footer-links {
-      display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;
-      margin: 20px 0; list-style: none;
+
+    .support-hero-icon {
+      width: 64px; height: 64px; flex-shrink: 0;
+      background: rgba(86,197,150,0.15);
+      border: 1.5px solid rgba(86,197,150,0.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px;
     }
-    .footer-links a {
-      font-size: 14px; color: var(--text-muted); text-decoration: none;
-      transition: color 0.18s;
+
+    .support-hero-text h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem; font-weight: 700; color: #fff;
+      margin-bottom: 6px;
     }
-    .footer-links a:hover { color: var(--accent-green); }
-    .footer-copy { font-size: 12px; color: var(--text-faint); margin-top: 24px; }
+    .support-hero-text p {
+      font-size: 15px; color: var(--text-muted); line-height: 1.6; max-width: 540px;
+    }
+
+    .support-email-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--accent-green); color: #0D1B14;
+      padding: 13px 26px; border-radius: 100px;
+      font-size: 14px; font-weight: 700;
+      text-decoration: none; margin-top: 16px;
+      transition: opacity 0.18s;
+    }
+    .support-email-btn:hover { opacity: 0.85; }
+
+    /* Contact cards row */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 52px;
+    }
+
+    .contact-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px 22px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .contact-card:hover { border-color: rgba(77,128,100,0.35); transform: translateY(-2px); }
+
+    .contact-card-icon { font-size: 26px; margin-bottom: 12px; }
+    .contact-card-title {
+      font-family: var(--font-display); font-size: 0.95rem; font-weight: 700;
+      color: #fff; margin-bottom: 5px;
+    }
+    .contact-card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.55; }
+    .contact-card a {
+      color: var(--accent-green); text-decoration: none; font-weight: 600;
+    }
+    .contact-card a:hover { text-decoration: underline; }
+
+    /* FAQ */
+    .faq-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem; font-weight: 700; color: #fff;
+      margin-bottom: 24px;
+    }
+
+    .faq-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .faq-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .faq-q {
+      width: 100%; background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 22px;
+      font-family: var(--font-body); font-size: 15px; font-weight: 600;
+      color: #fff; text-align: left;
+      gap: 12px;
+    }
+    .faq-q:hover { background: rgba(255,255,255,0.03); }
+
+    .faq-chevron {
+      flex-shrink: 0; width: 20px; height: 20px;
+      color: var(--text-muted);
+      transition: transform 0.25s ease;
+    }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.25s ease;
+      padding: 0 22px;
+      font-size: 14px; color: var(--text-muted); line-height: 1.65;
+    }
+    .faq-item.open .faq-a {
+      max-height: 300px;
+      padding: 0 22px 18px;
+    }
 
     /* ── App Store mockup card ── */
     .mockup-wrap {
@@ -390,6 +486,28 @@
     }
     .mockup-btn:hover { background: #0077ED; }
 
+    /* ── FOOTER ── */
+    footer {
+      background: #080F0A;
+      padding: 48px 24px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .footer-logo {
+      font-family: var(--font-display); font-size: 1.6rem; font-weight: 700;
+      color: var(--accent-green); margin-bottom: 12px;
+    }
+    .footer-links {
+      display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;
+      margin: 20px 0; list-style: none;
+    }
+    .footer-links a {
+      font-size: 14px; color: var(--text-muted); text-decoration: none;
+      transition: color 0.18s;
+    }
+    .footer-links a:hover { color: var(--accent-green); }
+    .footer-copy { font-size: 12px; color: var(--text-faint); margin-top: 24px; }
+
     /* ── Keyframes ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
@@ -412,6 +530,7 @@
     @media (max-width: 600px) {
       .steps-grid { grid-template-columns: 1fr 1fr; }
       .hero-stats { gap: 24px; }
+      .support-hero { padding: 28px 22px; }
     }
     @media (max-width: 420px) {
       .steps-grid { grid-template-columns: 1fr; }
@@ -422,28 +541,20 @@
 
 <!-- ═══════════════════════════ HERO ═══════════════════════════ -->
 <section class="hero">
-  <!-- Field pattern background -->
   <div class="field-bg">
     <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" fill="none" stroke="white">
-      <!-- Center circle -->
       <circle cx="400" cy="300" r="80" stroke-width="2"/>
       <circle cx="400" cy="300" r="140" stroke-width="1"/>
-      <!-- Center line -->
       <line x1="400" y1="0" x2="400" y2="600" stroke-width="1.5"/>
-      <!-- Outer boundary -->
       <rect x="40" y="40" width="720" height="520" rx="0" stroke-width="2"/>
-      <!-- Penalty areas -->
       <rect x="40" y="190" width="120" height="220" stroke-width="1.5"/>
       <rect x="640" y="190" width="120" height="220" stroke-width="1.5"/>
-      <!-- Goal areas -->
       <rect x="40" y="240" width="50" height="120" stroke-width="1.5"/>
       <rect x="710" y="240" width="50" height="120" stroke-width="1.5"/>
-      <!-- Corner arcs -->
       <path d="M40,40 Q60,40 60,60" stroke-width="1.5"/>
       <path d="M760,40 Q740,40 740,60" stroke-width="1.5"/>
       <path d="M40,560 Q60,560 60,540" stroke-width="1.5"/>
       <path d="M760,560 Q740,560 740,540" stroke-width="1.5"/>
-      <!-- Penalty spots -->
       <circle cx="145" cy="300" r="4" fill="white" stroke="none" opacity="0.5"/>
       <circle cx="655" cy="300" r="4" fill="white" stroke="none" opacity="0.5"/>
       <circle cx="400" cy="300" r="4" fill="white" stroke="none" opacity="0.5"/>
@@ -451,11 +562,8 @@
   </div>
 
   <div class="hero-badge">⚽ Disponibile su App Store</div>
-
   <div class="hero-icon">⚽</div>
-
   <h1 class="hero-title">Last<span>1</span></h1>
-
   <p class="hero-sub">
     Il gioco di calcio competitivo con classifiche in tempo reale,
     streak di vittorie e la modalità Reset che ribalta tutto.
@@ -463,7 +571,6 @@
 
   <div class="hero-ctas">
     <a href="https://apps.apple.com" target="_blank" rel="noopener noreferrer" class="btn-appstore">
-      <!-- Apple logo SVG -->
       <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
         <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
       </svg>
@@ -543,52 +650,28 @@
     </div>
 
     <div class="points-grid reveal">
-      <!-- Normale -->
       <div class="mode-card normal">
         <div class="mode-label">
           <span style="font-size:20px;">✅</span>
           <span class="mode-name" style="color:var(--accent-green);">Modalità Normale</span>
         </div>
         <div class="mode-sub">Partita standard — vinci per guadagnare punti</div>
-
-        <div class="pts-row">
-          <span class="pts-result">Vittoria</span>
-          <span class="pts-badge positive">+3 pt</span>
-        </div>
-        <div class="pts-row">
-          <span class="pts-result">Pareggio</span>
-          <span class="pts-badge neutral">0 pt</span>
-        </div>
-        <div class="pts-row">
-          <span class="pts-result">Sconfitta</span>
-          <span class="pts-badge neutral">0 pt</span>
-        </div>
+        <div class="pts-row"><span class="pts-result">Vittoria</span><span class="pts-badge positive">+3 pt</span></div>
+        <div class="pts-row"><span class="pts-result">Pareggio</span><span class="pts-badge neutral">0 pt</span></div>
+        <div class="pts-row"><span class="pts-result">Sconfitta</span><span class="pts-badge neutral">0 pt</span></div>
       </div>
-
-      <!-- Reset -->
       <div class="mode-card reset">
         <div class="mode-label">
           <span style="font-size:20px;">♻️</span>
           <span class="mode-name" style="color:var(--blue);">Modalità Reset</span>
         </div>
         <div class="mode-sub">Partita speciale — devi vincere per forza</div>
-
-        <div class="pts-row">
-          <span class="pts-result">Vittoria</span>
-          <span class="pts-badge neutral">0 pt</span>
-        </div>
-        <div class="pts-row">
-          <span class="pts-result">Pareggio</span>
-          <span class="pts-badge negative">−3 pt</span>
-        </div>
-        <div class="pts-row">
-          <span class="pts-result">Sconfitta</span>
-          <span class="pts-badge negative">−3 pt</span>
-        </div>
+        <div class="pts-row"><span class="pts-result">Vittoria</span><span class="pts-badge neutral">0 pt</span></div>
+        <div class="pts-row"><span class="pts-result">Pareggio</span><span class="pts-badge negative">−3 pt</span></div>
+        <div class="pts-row"><span class="pts-result">Sconfitta</span><span class="pts-badge negative">−3 pt</span></div>
       </div>
     </div>
 
-    <!-- App mockup -->
     <div class="mockup-wrap reveal">
       <div class="mockup-card">
         <div class="mockup-top">
@@ -603,7 +686,7 @@
           <span style="font-size:12px; color:var(--text-muted); margin-left:8px;">5.0 • Gratis</span>
         </div>
         <div class="mockup-desc">
-          Sfida i tuoi amici, scala la classifica e prova a tenere la tua streak. 
+          Sfida i tuoi amici, scala la classifica e prova a tenere la tua streak.
           Con la modalità Reset, ogni partita conta il doppio.
         </div>
         <button class="mockup-btn" onclick="window.open('https://apps.apple.com','_blank')">
@@ -623,49 +706,42 @@
     </div>
 
     <div class="features-grid">
-
       <div class="feature-card reveal" style="border-color:rgba(86,197,150,0.2);">
         <div class="feature-icon" style="background:rgba(86,197,150,0.12); border-color:rgba(86,197,150,0.3); color:var(--accent-green);">⚽</div>
         <div class="feature-title" style="color:var(--accent-green);">Obiettivo chiaro</div>
         <div class="feature-sub">Come si vince</div>
         <div class="feature-body">Segna più gol, vinci la partita e accumula punti. L'obiettivo è semplice: arrivare in cima alla classifica.</div>
       </div>
-
       <div class="feature-card reveal" style="border-color:rgba(123,159,224,0.2);">
         <div class="feature-icon" style="background:rgba(123,159,224,0.12); border-color:rgba(123,159,224,0.3); color:var(--blue);">♻️</div>
         <div class="feature-title" style="color:var(--blue);">Modalità Reset</div>
         <div class="feature-sub">Meccanica unica</div>
         <div class="feature-body">Chi è in difficoltà entra in modalità Reset: deve vincere o perde punti. Un meccanismo che rende ogni partita fondamentale.</div>
       </div>
-
       <div class="feature-card reveal" style="border-color:rgba(224,92,92,0.2);">
         <div class="feature-icon" style="background:rgba(224,92,92,0.12); border-color:rgba(224,92,92,0.3); color:var(--accent-red);">🚫</div>
         <div class="feature-title" style="color:var(--accent-red);">Partite bloccate</div>
         <div class="feature-sub">Gestione avanzata</div>
         <div class="feature-body">Alcune partite possono essere bloccate. Il sistema gestisce i casi speciali garantendo equità in classifica.</div>
       </div>
-
       <div class="feature-card reveal" style="border-color:rgba(255,183,3,0.2);">
         <div class="feature-icon" style="background:rgba(255,183,3,0.12); border-color:rgba(255,183,3,0.3); color:var(--amber);">🏅</div>
         <div class="feature-title" style="color:var(--amber);">Classifica live</div>
         <div class="feature-sub">Real-time ranking</div>
         <div class="feature-body">La classifica si aggiorna dopo ogni partita. Monitora la tua posizione e quella dei tuoi avversari in tempo reale.</div>
       </div>
-
       <div class="feature-card reveal" style="border-color:rgba(212,169,255,0.2);">
         <div class="feature-icon" style="background:rgba(212,169,255,0.12); border-color:rgba(212,169,255,0.3); color:var(--purple);">⚡</div>
         <div class="feature-title" style="color:var(--purple);">Streak di vittorie</div>
         <div class="feature-sub">Mantieni il ritmo</div>
         <div class="feature-body">Vinci partite consecutive per costruire la tua streak. Più sei costante, più il tuo ranking cresce in modo esponenziale.</div>
       </div>
-
       <div class="feature-card reveal" style="border-color:rgba(255,107,53,0.2);">
         <div class="feature-icon" style="background:rgba(255,107,53,0.12); border-color:rgba(255,107,53,0.3); color:var(--orange);">🔥</div>
         <div class="feature-title" style="color:var(--orange);">Sistema punti</div>
         <div class="feature-sub">Bilanciato e competitivo</div>
         <div class="feature-body">+3 per vittoria in modalità normale, penalità in modalità Reset. Un sistema che premia la consistenza e punisce la stagnazione.</div>
       </div>
-
     </div>
   </div>
 </section>
@@ -696,6 +772,136 @@
   </div>
 </section>
 
+<!-- ════════════════════════════════════════════════════════════════
+     ── SUPPORTO (Apple Guideline 1.5 compliant) ──
+     Anchor: #support  →  usa https://hawkingsapp.github.io/Last1/#support
+════════════════════════════════════════════════════════════════ -->
+<section class="support-section" id="support">
+  <div class="container">
+
+    <div class="reveal">
+      <div class="section-label">🛠 Supporto</div>
+      <h2 class="section-title">Come possiamo<br>aiutarti?</h2>
+      <p class="section-desc">Hai un problema con Last1 o una domanda sul funzionamento? Siamo qui per aiutarti.</p>
+    </div>
+
+    <!-- Contact hero banner -->
+    <div class="support-hero reveal">
+      <div class="support-hero-icon">✉️</div>
+      <div class="support-hero-text">
+        <h3>Contattaci direttamente</h3>
+        <p>
+          Per qualsiasi problema tecnico, domanda sul tuo account o segnalazione di bug,
+          scrivi al nostro team. Rispondiamo entro 24–48 ore nei giorni lavorativi.
+        </p>
+        <a href="mailto:last1app26@gmail.com" class="support-email-btn">
+          ✉️ last1app26@gmail.com
+        </a>
+      </div>
+    </div>
+
+    <!-- Contact cards -->
+    <div class="contact-grid reveal">
+      <div class="contact-card">
+        <div class="contact-card-icon">📧</div>
+        <div class="contact-card-title">Email di supporto</div>
+        <div class="contact-card-desc">
+          Scrivi a <a href="mailto:last1app26@gmail.com">last1app26@gmail.com</a> per
+          segnalazioni, bug o domande generali sull'app.
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-icon">⏱</div>
+        <div class="contact-card-title">Tempi di risposta</div>
+        <div class="contact-card-desc">
+          Il nostro team risponde tipicamente entro <strong style="color:#fff;">24–48 ore</strong>
+          nei giorni lavorativi (lun–ven).
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-icon">🔒</div>
+        <div class="contact-card-title">Privacy</div>
+        <div class="contact-card-desc">
+          Leggi la nostra
+          <a href="https://github.com/hawkingsapp/privacy_policy_Last1/blob/main/PrivacyPolicyLast1.pdf" target="_blank" rel="noopener">
+            Privacy Policy
+          </a>
+          per sapere come gestiamo i tuoi dati.
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="reveal">
+      <div class="faq-title">Domande frequenti</div>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Come faccio a segnalare un bug?
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-a">
+            Invia una email a <strong>last1app26@gmail.com</strong> con l'oggetto "Bug Report",
+            descrivi il problema e, se possibile, allega uno screenshot. Ogni segnalazione
+            viene esaminata e aiuta a migliorare l'app.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Non riesco ad accedere al mio account. Cosa faccio?
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-a">
+            Prova prima a chiudere e riaprire l'app. Se il problema persiste,
+            scrivi a <strong>last1app26@gmail.com</strong> indicando l'email o il nome utente
+            associato al tuo account e cercheremo di risolvere il problema il prima possibile.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Come funziona la modalità Reset?
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-a">
+            La modalità Reset si attiva in circostanze speciali (es. troppo distante dalla vetta
+            della classifica). In questa modalità, vincere non aggiunge punti, ma perdere o
+            pareggiare sottrae 3 punti. L'obiettivo è spingerti a competere al massimo.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            L'app è gratuita? Ci sono acquisti in-app?
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-a">
+            Sì, Last1 è completamente gratuita da scaricare. Per informazioni su eventuali
+            contenuti premium o aggiornamenti futuri, consulta la pagina dell'app sull'App Store
+            o contattaci via email.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Come posso eliminare il mio account?
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-a">
+            Per richiedere la cancellazione del tuo account e dei dati associati, invia una
+            email a <strong>last1app26@gmail.com</strong> con oggetto "Elimina account" dal
+            tuo indirizzo email registrato. Elaboreremo la richiesta entro 7 giorni lavorativi.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
 <footer>
   <div class="footer-logo">⚽ Last1</div>
@@ -704,12 +910,29 @@
   </p>
   <ul class="footer-links">
     <li><a href="#regolamento">Regolamento</a></li>
-    <li><a href="mailto:support@last1.app">Supporto</a></li>
+    <li><a href="#support">Supporto</a></li>
+    <li><a href="mailto:last1app26@gmail.com">Email</a></li>
     <li><a href="https://github.com/hawkingsapp/privacy_policy_Last1/blob/main/PrivacyPolicyLast1.pdf" target="_blank" rel="noopener">Privacy Policy</a></li>
     <li><a href="#" target="_blank" rel="noopener">Termini di Servizio</a></li>
   </ul>
   <div class="footer-copy">© 2026 Last1. Tutti i diritti riservati.<br>Made with ❤️ in Milano, Italy</div>
 </footer>
+
+<script>
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    // close all
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    // open clicked if it was closed
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Auto-open support section if URL contains #support
+  if (window.location.hash === '#support') {
+    document.getElementById('support').scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
 
 </body>
 </html>
