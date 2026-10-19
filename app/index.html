@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Last1 · Scarica l'app</title>
+<meta name="description" content="Unisciti alla lega dei tuoi amici su Last1: scarica l'app.">
+<!-- Anteprima quando il link viene incollato su WhatsApp / Telegram -->
+<meta property="og:title" content="Last1 ⚽🎾 — sfida i tuoi amici">
+<meta property="og:description" content="Scarica Last1: crea la tua lega o unisciti a quella dei tuoi amici.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0F1E16">
+<style>
+  :root {
+    --bg: #0F1E16;
+    --card: #17291F;
+    --green: #4D8064;
+    --gold: #FFB700;
+    --text: #FFFFFF;
+    --muted: rgba(255,255,255,.6);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: radial-gradient(120% 80% at 50% 0%, #1F4A33 0%, var(--bg) 60%);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px 16px;
+  }
+  .card {
+    width: 100%; max-width: 380px; text-align: center;
+    background: var(--card);
+    border: 1.5px solid rgba(255,183,0,.45);
+    border-radius: 26px; padding: 28px 22px 22px;
+    box-shadow: 0 0 40px rgba(255,183,0,.12);
+  }
+  .logo {
+    width: 76px; height: 76px; margin: 0 auto 14px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-size: 36px;
+    background: linear-gradient(135deg, #FFD45C, #E09A00);
+    border: 3px solid #fff;
+  }
+  h1 { font-size: 24px; margin: 0 0 6px; font-weight: 900; }
+  p { color: var(--muted); font-size: 14px; line-height: 1.45; margin: 0 0 18px; }
+  .code {
+    display: none; margin: 0 0 18px; padding: 12px; border-radius: 14px;
+    background: rgba(255,183,0,.1); border: 1px dashed var(--gold);
+  }
+  .code small { display: block; color: var(--muted); font-size: 11px; letter-spacing: 1px; }
+  .code b { display: block; font-size: 28px; letter-spacing: 8px; color: var(--gold); margin: 4px 0 8px; }
+  .code button {
+    background: transparent; color: var(--gold); border: 1px solid var(--gold);
+    border-radius: 10px; padding: 6px 14px; font-weight: 700; cursor: pointer;
+  }
+  a.store {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    height: 52px; margin-top: 10px; border-radius: 14px;
+    color: #fff; text-decoration: none; font-weight: 800; font-size: 15px;
+    background: #000; border: 1px solid rgba(255,255,255,.25);
+  }
+  a.store.android { background: var(--green); }
+  .hint { margin-top: 16px; font-size: 11px; color: rgba(255,255,255,.35); }
+</style>
+</head>
+<body>
+  <main class="card">
+    <div class="logo">🏆</div>
+    <h1>Last1</h1>
+    <p id="msg">Scarica l'app e unisciti alla lega dei tuoi amici.</p>
+
+    <div class="code" id="codeBox">
+      <small>CODICE D'INVITO</small>
+      <b id="code"></b>
+      <button id="copy" type="button">Copia codice</button>
+    </div>
+
+    <a class="store ios" id="ios" href="https://apps.apple.com/it/app/last1/id6761646903"> App Store</a>
+    <a class="store android" id="android" href="https://play.google.com/store/apps/details?id=com.ale.Soccup">▶ Google Play</a>
+
+    <div class="hint" id="hint">Dopo l'installazione apri Last1 e inserisci il codice in “Unisciti”.</div>
+  </main>
+
+<script>
+  var IOS = "https://apps.apple.com/it/app/last1/id6761646903";
+  var ANDROID = "https://play.google.com/store/apps/details?id=com.ale.Soccup";
+
+  // Codice lega opzionale: .../app?c=AB12CD
+  var code = "";
+  try {
+    code = (new URLSearchParams(location.search).get("c") || "")
+      .toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 8);
+  } catch (e) {}
+  if (!code) {
+    // Link "scarica l'app" senza codice
+    document.getElementById("msg").textContent =
+      "Il gioco dell'ultimo che resta in piedi: calcio e tennis. Scarica l'app e sfida i tuoi amici.";
+    document.getElementById("hint").style.display = "none";
+  }
+  if (code) {
+    document.getElementById("code").textContent = code;
+    document.getElementById("codeBox").style.display = "block";
+    document.getElementById("copy").onclick = function () {
+      var btn = this;
+      var done = function () { btn.textContent = "Copiato ✓"; };
+      if (navigator.clipboard) navigator.clipboard.writeText(code).then(done, done);
+      else done();
+    };
+  }
+
+  var ua = navigator.userAgent || "";
+  var isIOS = /iPhone|iPad|iPod/i.test(ua) ||
+    (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1); // iPad recenti
+  var isAndroid = /Android/i.test(ua);
+
+  // Senza codice: vai subito allo store giusto.
+  // Con codice: mostra prima il codice da copiare, poi lo store dopo 2,5 s.
+  var dest = isIOS ? IOS : (isAndroid ? ANDROID : null);
+  if (isIOS) document.getElementById("android").style.display = "none";
+  if (isAndroid) document.getElementById("ios").style.display = "none";
+  if (dest) {
+    setTimeout(function () { location.href = dest; }, code ? 2500 : 0);
+  }
+</script>
+</body>
+</html>
